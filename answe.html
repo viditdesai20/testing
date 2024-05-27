@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cute Panda Link</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .container {
+    position: relative;
+  }
+  .click-me-link {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s;
+  }
+  .click-me-link:hover {
+    background-color: #45a049;
+  }
+  .panda {
+    max-width: 300px; /* Adjust the width as needed */
+    height: auto;
+    margin-top: 20px;
+  }
+  .message {
+    display: none;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  #answer {
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+    width: 300px;
+    box-sizing: border-box;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <a href="#" class="click-me-link" onclick="nextStep(); return false;">Click me</a>
+  <img src="https://static.vecteezy.com/system/resources/previews/003/777/943/original/panda-cartoon-cute-say-hello-panda-animals-illustration-free-vector.jpg" alt="Cute Panda" class="panda">
+  <div class="message" id="messageText"></div>
+  <form id="answerForm" style="display:none;">
+    <label for="answerYes">Yes</label>
+    <input type="radio" id="answerYes" name="answer" value="Yes">
+    <label for="answerNo">No</label>
+    <input type="radio" id="answerNo" name="answer" value="No">
+    <button type="button" onclick="submitAnswer()">Submit</button>
+  </form>
+</div>
+
+<script>
+  var step = 0;
+
+  function nextStep() {
+    step++;
+    if (step === 1) {
+      showMessage('Hello, hope you are doing well.');
+    } else if (step === 2) {
+      showMessageWithOption('Hope you missed me.');
+    } else if (step === 3) {
+      showMessage('I am just a call away. Thank you!');
+      // Hide the "Click me" link after the final message
+      document.querySelector('.click-me-link').style.display = 'none';
+    }
+  }
+
+  function showMessage(message) {
+    document.getElementById('messageText').innerText = message;
+    var clickMeLink = document.querySelector('.click-me-link');
+    clickMeLink.style.display = 'none';
+    document.querySelector('.message').style.display = 'block';
+    if (step === 2) {
+      document.getElementById('answerForm').style.display = 'none';
+    } else {
+      clickMeLink.style.display = 'block';
+    }
+  }
+
+  function showMessageWithOption(message) {
+    document.getElementById('messageText').innerText = message;
+    var clickMeLink = document.querySelector('.click-me-link');
+    clickMeLink.style.display = 'none';
+    document.querySelector('.message').style.display = 'block';
+    document.getElementById('answerForm').style.display = 'block';
+  }
+
+  function submitAnswer() {
+    var answer = document.querySelector('input[name="answer"]:checked');
+    if (answer) {
+      if (answer.value === 'Yes') {
+        showMessage('I am just a call away. Thank you!');
+        // Hide the "Click me" link after the final message
+        document.querySelector('.click-me-link').style.display = 'none';
+      } else {
+        document.getElementById('messageText').innerText = 'Thank you!';
+        document.getElementById('answerForm').style.display = 'none';
+      }
+    }
+  }
+</script>
+
+</body>
+</html>
+
